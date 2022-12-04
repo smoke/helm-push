@@ -71,11 +71,15 @@ if [ "$REGISTRY_APPVERSION" ]; then
   REGISTRY_APPVERSION="--app-version ${REGISTRY_APPVERSION@Q}"
 fi
 
-
+if [ "$ADD_REPOSITORIES" != "" ]; then
+  while read addRepositoryArgs;
+  do
+    eval $(echo helm repo add $addRepositoryArgs)
+  done <<< "$ADD_REPOSITORIES"
+  helm repo update
+fi
 
 cd "${CHART_FOLDER}"
-helm repo add stable https://charts.helm.sh/stable
-helm repo update
 
 OUT_DIR=$(mktemp -d)
 
