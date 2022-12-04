@@ -56,7 +56,7 @@ inputs:
     default: ''
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://ghcr.io/smoke/helm-push:v1.0.0'
   env:
     CHART_FOLDER: ${{ inputs.chart-folder }}
     FORCE: ${{ inputs.force }}
